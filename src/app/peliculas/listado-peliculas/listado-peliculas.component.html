@@ -1,0 +1,76 @@
+@if(Admin==true){
+  <div class="div-agregar-pelicula">
+  <button mat-flat-button class="primary" (click)="agregarPelicula()">Agregar Pelicula</button>
+</div>
+}
+
+
+
+
+
+<!-- <app-listado-generico [listado]="peliculas">
+  <ng-container cargando>
+    <span>Cargando</span>
+  </ng-container>
+  <ng-container vacio>
+    <span>No Hay Peliculas en esta Cartelera.</span>
+  </ng-container>
+
+  <ng-container contenido>
+    @for (pelicula of peliculas; track $index) {
+      <div class="contenedor-peliculas">
+        <div class="cardmovie">
+          <div>
+            @if(pelicula.poster){
+              <img [src]="pelicula.poster"  width ="169" height="250"/>
+            } @else
+            {
+              <img src="img/noposter.jpg"  width ="169" height="250"/>
+            }
+            
+          </div>
+          <div>
+            <p>{{$index}} - Nombre: {{pelicula.nombre | uppercase}}</p>
+            <p>Fecha: {{pelicula.fecha | date:"dd MMMM yyyy"}}</p>
+            <p>Precio: {{pelicula.precio | currency}}</p>
+            <p><app-rating [maxRating]="5" (votado)="procesarVoto($event)"></app-rating></p>
+            <button  mat-stroked-button class="primary" matTooltip="This is a tooltip!" (click)="remover($index)">
+              Eliminar
+              <mat-icon class="icon-color">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </ng-container>
+</app-listado-generico> -->
+
+<app-listado-generico [listado]="peliculas">
+  <ng-container contenido>
+    <div class="peliculas-container">
+      @for (pelicula of peliculas; track $index) {
+        <div class="pelicula-container">
+          <a>
+            @if(pelicula.poster){
+              <img [src]="pelicula.poster"  width ="169" height="250"/>
+            } @else
+            {
+              <img src="img/noposter.jpg"  width ="169" height="250"/>
+            }
+          </a>
+          <p>
+            <a>{{pelicula.nombre | uppercase }}</a>
+          </p>
+          <div class="class_margin">
+            <app-rating [maxRating]="5"></app-rating>
+          </div>
+          <div>
+            <a mat-flat-button class="primary">Editar</a>
+            <button mat-flat-button class="secondary">Borrar</button>
+          </div>
+        </div>
+      }
+    </div>
+  </ng-container>
+</app-listado-generico>
+
