@@ -29,17 +29,14 @@ export class FormGeneroComponent implements OnInit {
   private formbuilder = inject(FormBuilder);
 
   form = this.formbuilder.group({
-    nombre: ['',{validators:[Validators.required,capitalString()]}]
+    nombre: ['',{validators:[Validators.required,capitalString(),Validators.maxLength(50)]}]
   });
 
   obtenerErrorNombre():string{
     let nombre = this.form.controls.nombre;
-    if(nombre.hasError('required')){
-      return "Campo nombre Requerido";
-    }
-    if(nombre.hasError('firstValue')){
-      return nombre.getError('firstValue').mensaje;
-    }
+    if(nombre.hasError('required')) return "Campo nombre Requerido";
+    if(nombre.hasError('firstValue')) return nombre.getError('firstValue').mensaje;
+    if(nombre.hasError('maxlength')) return `Campo nombre no puede tener mas de ${nombre.getError('maxlength').requiredLength} caracteres `; 
     return "";
   }
 

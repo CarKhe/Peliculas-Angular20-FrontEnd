@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { GeneroDTO } from './generos';
+import { GeneroCreacionDTO, GeneroDTO } from './generos';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
@@ -16,5 +16,9 @@ export class GenerosService {
 
   public getAll(): Observable<GeneroDTO[]>{ //Retorno parecido a una promesa sin importar el tiempo que pase
     return this.http.get<GeneroDTO[]>(this.urlApi); //Llamado de la API para retornar el valor deseado
+  }
+
+  public create(genero: GeneroCreacionDTO){
+    return this.http.post(this.urlApi,genero);
   }
 }
