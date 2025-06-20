@@ -2,7 +2,7 @@
 <button mat-flat-button class="primary" routerLink="/generos/crear">Crear</button>
 <app-listado-generico [listado]="generos">
     <ng-container>
-        <table mat-table [dataSource]="generos" class="mat-elevation-z8">
+        <table mat-table [dataSource]="generos" class="mat-elevation-z8 indice-elementos">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef> Id. </th>
                 <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -15,12 +15,22 @@
                 <th mat-header-cell *matHeaderCellDef> Acciones. </th>
                 <td mat-cell *matCellDef="let element">  
                     <a routerLink="/generos/editar/{{element.id}}" mat-flat-button>Editar</a>
-                    <button mat-flat-button class="primary">Borrar</button>
+                    <button mat-flat-button class="primary" 
+                    [swal]="{title:'confirmacion',text:'¿Estas Seguro?',showCancelButton:true}"
+                    (confirm)="borrarGenero(element.id)"
+                    >Borrar</button>
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="columnasAMostrar"></tr>
             <tr mat-row *matRowDef="let row; columns: columnasAMostrar "></tr>
         </table>
+
+        <mat-paginator showFirstLastButtons 
+        [length]="cantidadTotalRegistros" 
+        [pageSize]="paginacion.recordsPerPage"
+        [pageSizeOptions]="[5,10,50]" 
+        [pageIndex]="paginacion.pagina-1"
+        class="mat-elevation-z8" (page)="actualizarPaginacion($event)"></mat-paginator>
     </ng-container>
 </app-listado-generico>

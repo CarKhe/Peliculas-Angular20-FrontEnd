@@ -1,3 +1,9 @@
 <h1>Editar Genero</h1>
-<p>genero id a editar es {{id}}</p>
-<app-form-genero [modelo]="genero" (formPost)="editarCambios($event)"></app-form-genero>
+@if(genero){
+
+    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+    <app-form-genero [modelo]="genero" (formPost)="editarCambios($event)"></app-form-genero>
+} @else{
+    <app-cargando></app-cargando>
+}
